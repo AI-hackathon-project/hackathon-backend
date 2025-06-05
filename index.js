@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 import cors from "cors"
 import { userRouter } from "./routes/user_route.js";
 import expressOasGenerator from "@mickeymond/express-oas-generator";
-
+import { translateRouter } from "./routes/translation_route.js";
 
 const app = express();
 
@@ -36,8 +36,9 @@ app.use(session({
 dbConnection();
 
 app.use('/api/v1', userRouter);
+app.use('api/v1', translateRouter)
 
-
+// expressOasGenerator.handleRequests();
 app.use((req, res) => res.redirect('/api-docs/'));
 
 const port = process.env.PORT;
